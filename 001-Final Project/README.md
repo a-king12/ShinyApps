@@ -13,4 +13,4 @@ Our Beersgalore app is designed with the brew master in mind. Somes times when c
 
 The goal is to provide that extra help.
 
-![](./001-Final Project/beerApp.png)
+![](001-Final Project/beerApp.png)
