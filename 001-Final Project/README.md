@@ -1,11 +1,11 @@
-## Beersgalore
+#Beersgalore
 
 ***Team Members***
 
-Alexia King 
+'''Alexia King 
 Christy Hoke 
 Elivs Dang 
-Lavanya Bommareddy 
+Lavanya Bommareddy '''
 
 **Project Summary**
 
