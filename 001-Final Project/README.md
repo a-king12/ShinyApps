@@ -10,7 +10,7 @@ Alexia King
 
 Christy Hoke 
 
-Elivs Dang 
+Elvis Dang 
 
 Lavanya Bommareddy
 
