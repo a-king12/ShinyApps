@@ -2,10 +2,10 @@
 
 ***Team Members***
 
-Alexia King
-Christy Hoke
-Elivs Dang
-Lavanya Bommareddy
+Alexia King 
+Christy Hoke 
+Elivs Dang 
+Lavanya Bommareddy 
 
 **Project Summary**
 
