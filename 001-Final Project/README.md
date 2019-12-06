@@ -2,9 +2,7 @@
 
 **Project Summary**
 
-Our Beersgalore app is designed with the brew master in mind. Somes times when coming up with new flavors for beer, you need a little help.
-
-The goal is to provide that extra help. 
+Beersgalor is a dashboard that provides quick insights to the unique additions of beers based off of survey results. Use the different tabs to get views based on addition rankings by favor, interactive graphs, and more. Feel free to search by your favorite beer type and flavor too
 
 ## Team Members
 
