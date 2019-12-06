@@ -12,3 +12,5 @@ Lavanya Bommareddy
 Our Beersgalore app is designed with the brew master in mind. Somes times when coming up with new flavors for beer, you need a little help.
 
 The goal is to provide that extra help.
+
+[![Demo](./001-Final Project/beerApp.png)](./001-Final Project/beerApp.png)
