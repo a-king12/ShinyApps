@@ -1,27 +1,7 @@
 # Server 
 server <- function(input, output) {
   
-  # # Interactive bar chart on the flavors tab to show the top choices of beer per flavor
-  # output$flav <- renderHighchart({ highchart() %>% hc_add_series(beers %>% filter(addition== input$flavors),
-  #                                                                type="bar",hcaes(x=beer,y=value*100),tooltip=list(pointFormat = "{point.beer}: {point.value}"),showInLegend=F) %>%
-  #     hc_add_series(beers %>% filter(addition== input$flavors),type='bubble',hcaes(x=beer,y=value*100,size=value),
-  #                   tooltip=list(pointFormat = "{point.beer}: {point.value}"),showInLegend=F,marker=list(fillOpacity=1),minSize=3,
-  #                   maxSize=5) %>%
-  #     hc_plotOptions(column = list(pointWidth = .5, pointPlacement = "on")) %>%
-  #     hc_xAxis(title = list(text = "List of Beers")) %>%
-  #     hc_yAxis(title = list(text = "Likliness by percentage", 
-  #                           style = list(color = "white", 
-  #                                        fontSize = 13)), 
-  #              labels = list(style = list(color = "white", fontSize = 11)),
-  #              tickColor = "white", 
-  #              gridLineColor = "transparent") %>%
-  #     hc_colors(color = "orange") %>%
-  #     hc_xAxis(labels = list(enabled = F), gridLineColor = "transparent")%>%
-  #     hc_chart(backgroundColor = 'transparent')
-  #   
-  # })
-  
-  # the table of the addition and it's popularity
+  # the data table of the top 15 beers based on flavor selection
   output$flavortable <- DT::renderDataTable({
     forFlavTable <- topflavor() %>% select(-c(addition)) %>% reshape::rename(replace = c("value" = "Likeness(Highest = 100%)") %>% reshape::rename(replace = c("addition" = "Flavors")))
     datatable(forFlavTable, caption = "    Top Flavors") %>% formatPercentage('Likeness(Highest = 100%)')  
@@ -33,11 +13,14 @@ server <- function(input, output) {
     input$update
     filterBeers <- beers %>% filter(beer == input$beerSlider) %>% arrange(desc(value)) %>% top_n(n = input$topFlavors)
   })  
+  
+  # Reactive function to filter the top 15 beers 
   topflavor <- reactive({
     filterFlavor <- beers %>% filter(addition== input$flavors)
     filterFlavor %>% arrange(desc(value)) %>% top_n(n = 15)
   }) 
   
+  # Reactive function to filter the top flavor for the google trend line
   topflavor_1 <- reactive({
     filterFlavor <- beers %>% filter(addition== input$flavors)
     filterFlavor %>% arrange(desc(value)) %>% top_n(n = 1)
@@ -67,7 +50,7 @@ server <- function(input, output) {
       
       ggplotly(popBar)
   })
-  # The plot of trends of the additions
+  # The plot of google trends of the additions
   output$trends <- renderPlot({
     topAdditions <- topBeers() %>% select(-c("beer","value"))
     topAdditions <- data.frame(lapply(topAdditions, as.character), stringsAsFactors=FALSE)
@@ -101,12 +84,12 @@ server <- function(input, output) {
                                   legend.key.height = unit(7,"line")) + 
                                   ggtitle("Internet Search Trends for Top Flavors")
   })
-  # the table of the addition and it's popularity
+  # the data table of the addition and it's popularity
   output$table <- DT::renderDataTable({
     forTable <- topBeers() %>% select(-c(beer)) %>% reshape::rename(replace = c("value" = "Likeness(Highest = 100%)") %>% reshape::rename(replace = c("addition" = "Flavors")))
     datatable(forTable, caption = "    Top Flavors") %>% formatPercentage('Likeness(Highest = 100%)') 
   })
-  
+  #Line plot to construct a trend of the selected beer addition
   output$trends_flavor <- renderPlot({
     topFlavors_tab <- topflavor_1()  %>% select(-c("beer","value"))
     topFlavors_tab <- data.frame(lapply(topFlavors_tab, as.character), stringsAsFactors=FALSE)
@@ -122,7 +105,5 @@ plot(trend_flavor) + theme(title = element_text("Internet Search Trends of flavo
                         legend.key.height = unit(7,"line")) + 
       ggtitle("Internet Search Trends for Chosen Flavor")
   })
-  
-}
   
 }
