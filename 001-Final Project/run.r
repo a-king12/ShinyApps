@@ -162,10 +162,7 @@ body <- dashboardBody(
               #highchartOutput("flav", width = "auto", height = "600px")%>% withSpinner(type=5,color="#CE7209"),
               )
     ),
-    tabItem(tabName = "link",
-            uiOutput("tab")
-            
-    ),
+  
     # Plots and Input that will be in the Survey menu
     tabItem(width = 10,
             tabName = "surveyTab",
